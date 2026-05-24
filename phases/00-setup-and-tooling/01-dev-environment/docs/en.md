@@ -161,4 +161,22 @@ See `outputs/prompt-env-check.md` for a prompt that helps AI assistants diagnose
 
 1. Run the verification script and fix any failures
 2. Create a Python virtual environment for this course and install PyTorch
+    uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+    python -c "import torch; print(f'PyTorch {torch.__version__}'); print(f'CUDA available: {torch.cuda.is_available()}')"
 3. Write a "hello world" in all four languages and run each one
+4. How to save this virtuall environment for later use
+Create a lock & requirement file
+**Bash:**
+````markdown
+```bash
+uv pip compile requirements.txt -o uv.lock
+```
+Commit the lock and requiremnts file to git and to be present in outputs folder of phase 0
+Then get it back when required and do the following after retrieving lock and requirements file
+**Bash:**
+````markdown
+```bash
+uv venv
+source .venv/bin/activate
+uv pip install -r requirements.txt --constraint uv.lock
+```
